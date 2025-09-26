@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Single Page — Account Setup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Account Setup</h1>
+    <p class="subtle">Upload a recorded steps JSON and step through the guided flow. The overlay highlights targets and logs each decision to the console.</p>
+  </header>
+
+  <main class="container">
+     Controls: Upload + Example loader 
+    <section class="controls" aria-label="Steps Loader">
+      <label class="file-input">
+        <span>Upload steps JSON</span>
+        <input id="filePicker" type="file" accept="application/json" />
+      </label>
+      <button id="loadExample" type="button" class="btn">Load example steps</button>
+    </section>
+
+     Sample UI Elements 
+    <form id="acct-form" class="demo-form" aria-label="Account Setup Form">
+      <label for="full_name">Full name</label>
+      <input id="full_name" name="full_name" type="text" placeholder="John Doe" />
+
+      <label for="contact_email">Email</label>
+      <input id="contact_email" name="email" type="email" placeholder="john@example.com" />
+
+      <label for="phone">Mobile number</label>
+      <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" />
+
+      <label for="role">Role</label>
+      <select id="role" name="role">
+        <option>User</option>
+        <option>Admin</option>
+        <option>Viewer</option>
+      </select>
+
+      <label for="country">Country</label>
+      <select id="country" name="country">
+        <option>India</option>
+        <option>USA</option>
+        <option>UK</option>
+      </select>
+
+      <fieldset>
+        <legend>Account type</legend>
+        <label><input type="radio" name="acctType" value="employee"> Employee</label>
+        <label><input type="radio" name="acctType" value="contractor"> Contractor</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Preferred contact</legend>
+        <label><input type="radio" name="contactPref" value="email"> Email</label>
+        <label><input type="radio" name="contactPref" value="phone"> Phone</label>
+      </fieldset>
+
+      <label class="checkbox"><input id="accept_tos" type="checkbox" /> I agree to Terms</label>
+      <label class="checkbox"><input id="newsletter" type="checkbox" /> Subscribe to updates</label>
+
+      <button id="create_account" type="button" class="btn primary">Create Account</button>
+    </form>
+
+    <div id="success" role="status" aria-live="polite" class="success">Success! Account created.</div>
+  </main>
+
+   Overlay: hole-dim mask + panel 
+  <div id="guide-overlay" aria-hidden="true"></div>
+
+  <nav id="guide-panel" aria-label="Guide Panel">
+    <div class="panel-row">
+      <strong id="stepCounter">Step 0/0</strong>
+      <span id="stepLabel" class="muted"></span>
+    </div>
+    <div class="panel-row">
+      <button id="startBtn" class="btn small" type="button">Start</button>
+      <button id="prevBtn" class="btn small" type="button">Prev</button>
+      <button id="nextBtn" class="btn small" type="button">Next</button>
+      <button id="resetBtn" class="btn small" type="button">Reset</button>
+    </div>
+  </nav>
+
+  <script src="./script.js"></script>
+  <script>
+    document.getElementById('create_account').addEventListener('click', () => {
+      setTimeout(() => {
+        document.getElementById('success').style.display = 'block';
+      }, 400);
+    });
+  </script>
+</body>
+</html>

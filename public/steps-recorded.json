@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "env": { "baseUrl": "/task.html" },
+  "steps": [
+    { "id": "s0", "action": "navigate", "target_text": "Open the account setup page" },
+    { "id": "s1", "action": "type", "target_text": "Full name field", "value": "John Doe" },
+    { "id": "s2", "action": "type", "target_text": "Email address", "value": "john@example.com" },
+    { "id": "s3", "action": "type", "target_text": "Mobile number", "value": "+91 98765 43210" },
+    { "id": "s4", "action": "select", "target_text": "User role", "value": "Administrator" },
+    { "id": "s5", "action": "select", "target_text": "Country of residence", "value": "United States" },
+    { "id": "s6", "action": "radio", "target_text": "Set account type", "value": "Contractor" },
+    { "id": "s7", "action": "radio", "target_text": "Preferred contact method", "value": "Phone call" },
+    { "id": "s8", "action": "check", "target_text": "Agree to the Terms" },
+    { "id": "s9", "action": "check", "target_text": "Opt into newsletter" },
+    { "id": "s10", "action": "click", "target_text": "Create Account button" },
+    {
+      "id": "s11",
+      "action": "assert",
+      "target_text": "Success banner appears",
+      "assert": { "type": "textContains", "value": "Success" }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "mappings": [
+    { "target_text": "Full name field", "selector": "#full_name" },
+    { "target_text": "Email address", "selector": "#contact_email" },
+    { "target_text": "Mobile number", "selector": "#phone" },
+    { "target_text": "User role", "selector": "#role" },
+    { "target_text": "Country of residence", "selector": "#country" },
+    { "target_text": "Set account type", "selector": "input[type='radio'][name='acctType']" },
+    { "target_text": "Preferred contact method", "selector": "input[type='radio'][name='contactPref']" },
+    { "target_text": "Agree to the Terms", "selector": "#accept_tos" },
+    { "target_text": "Opt into newsletter", "selector": "#newsletter" },
+    { "target_text": "Create Account button", "selector": "#create_account" },
+    { "target_text": "Success banner appears", "selector": "#success" }
+  ]
+}

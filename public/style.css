@@ -1,0 +1,194 @@
+/* base styles + overlay hole mask + highlight */
+
+:root {
+  --brand: #0d6efd; /* primary */
+  --bg: #ffffff;
+  --fg: #11181c;
+  --muted: #6b7280;
+  --dim: rgba(0, 0, 0, 0.45);
+  --success-bg: #e8f5e9;
+  --success-border: #2e7d32;
+  --radius: 10px;
+  --panel-bg: #11181c;
+  --panel-fg: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--fg);
+  background: var(--bg);
+}
+
+.container {
+  max-width: 860px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+h1 {
+  margin: 0 0 8px;
+}
+.subtle {
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.file-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.file-input input {
+  display: none;
+}
+.file-input span {
+  font-size: 14px;
+  color: #111;
+}
+.btn {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #111;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn:hover {
+  border-color: #cbd5e1;
+}
+.btn.primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+.btn.small {
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.demo-form {
+  display: grid;
+  gap: 12px;
+  max-width: 520px;
+}
+label {
+  font-weight: 600;
+}
+input,
+select,
+button {
+  padding: 8px;
+}
+.checkbox {
+  font-weight: 400;
+}
+
+.success {
+  display: none;
+  margin: 16px 0;
+  padding: 10px;
+  border: 1px solid var(--success-border);
+  background: var(--success-bg);
+  border-radius: 8px;
+}
+
+/* Highlight class for target */
+.guided-highlight {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 6px;
+  transition: outline-color .15s ease;
+}
+
+/* Overlay with a rectangular hole controlled via CSS variables */
+#guide-overlay {
+  position: fixed;
+  inset: 0;
+  --x: 0px;
+  --y: 0px;
+  --w: 0px;
+  --h: 0px;
+  background: var(--dim);
+  pointer-events: none; /* do not block clicks */
+  opacity: 0;
+  transition: opacity .15s ease;
+  /* Cut a hole using clip-path (four rectangles around the target rect) */
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 100%,
+    0% 100%,
+    0% 100%,
+    0% 0%,
+    /* The hole will be reset via JS by toggling a second overlay when active */
+    0 0,
+    0 0,
+    0 0,
+    0 0
+  );
+}
+#guide-overlay.active {
+  opacity: 1;
+}
+#guide-overlay.active.hole {
+  /* Using inset() path with variables for clarity */
+  clip-path: path(
+    "M 0 0 H 100% V 100% H 0 Z\
+                   M var(--x) var(--y)\
+                   H calc(var(--x) + var(--w))\
+                   V calc(var(--y) + var(--h))\
+                   H var(--x)\
+                   Z"
+  );
+}
+
+/* Panel */
+#guide-panel {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  background: var(--panel-bg);
+  color: var(--panel-fg);
+  border-radius: 12px;
+  padding: 10px 12px;
+  width: min(360px, calc(100% - 32px));
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9999; /* above overlay */
+}
+#guide-panel .panel-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+#stepCounter {
+  font-size: 14px;
+}
+#stepLabel {
+  font-size: 13px;
+}
+.muted {
+  color: #cbd5e1;
+}
