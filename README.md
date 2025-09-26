@@ -18,8 +18,3 @@ LLM/stub
 
 Time spent
 - ~1.5 hours (structure, overlay/hole, resolver, wiring, docs).
-
-  ## Author
-Harini L  
-GitHub: https://github.com/Harini410  
-LinkedIn: https://www.linkedin.com/in/harini-lakshmanan-04
